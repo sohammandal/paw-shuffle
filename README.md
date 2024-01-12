@@ -4,6 +4,9 @@
 
 **Live Deployment:** https://paw-shuffle.streamlit.app/
 
+![Screenshot 2024-01-12 at 10 08 59 PM](https://github.com/sohammandal/paw-shuffle/assets/18245872/9fa79bdf-0059-4142-bc51-49fe6d202603)
+
+
 **Data Sources:**
 - Random Dog Image Generator: https://dog.ceo/dog-api/
 - American Kennel Club dog breed dataset: https://tmfilho.github.io/akcdata/
