@@ -148,7 +148,7 @@ def display_charts(df_result):
         col=2,
     )
 
-    fig.update_layout(height=1000, width=900)
+    fig.update_layout(height=900, width=900)
     st.plotly_chart(fig, theme="streamlit", use_container_width=True)
 
 def main():
@@ -178,7 +178,7 @@ def main():
 
             if image_response.status_code == 200:
                 image = Image.open(BytesIO(image_response.content))
-                st.image(image, caption=df_result["breed"], width=700)
+                st.image(image, caption=df_result["breed"], use_column_width='auto')
             else:
                 st.error(f"Error code: {image_response.status_code}")
         else:
