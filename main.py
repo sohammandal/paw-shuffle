@@ -2,6 +2,7 @@ import streamlit as st
 import requests
 import pandas as pd
 import re
+import time
 from PIL import Image
 from io import BytesIO
 import plotly.express as px
@@ -33,7 +34,7 @@ def request_dog_api_data():
 def extract_breed_name(url):
     """Use regex to extract breed name from URL"""
 
-    print(f"URL: {url}")
+    print(f"API URL: {url}")
     pattern = r"https:\/\/images\.dog\.ceo\/breeds\/([\w-]+)\/"
     match = re.search(pattern, url)
     if match:
@@ -66,59 +67,14 @@ def display_charts(df_result):
         px.histogram(df, x="average_height", barmode="group").data[0], row=1, col=1
     )
 
-    fig.add_annotation(
-        x=df_result["average_height"],
-        y=0,
-        text=f'{df_result["breed"]}',
-        showarrow=True,
-        arrowhead=4,
-        ax=0,
-        ay=-40,
-        arrowcolor="red",
-        font=dict(color="black", size=12),
-        bgcolor="white",
-        row=1,
-        col=1,
-    )
-
     # Chart 2: Weight Distribution
     fig.add_trace(
         px.histogram(df, x="average_weight", barmode="group").data[0], row=1, col=2
     )
 
-    fig.add_annotation(
-        x=df_result["average_weight"],
-        y=0,
-        text=f'{df_result["breed"]}',
-        showarrow=True,
-        arrowhead=4,
-        ax=0,
-        ay=-40,
-        arrowcolor="red",
-        font=dict(color="black", size=12),
-        bgcolor="white",
-        row=1,
-        col=2,
-    )
-
     # Chart 3: Expectancy Distribution
     fig.add_trace(
         px.bar(df, x="average_expectancy", orientation="v").data[0], row=2, col=1
-    )
-
-    fig.add_annotation(
-        x=df_result["average_expectancy"],
-        y=0,
-        text=f'{df_result["breed"]}',
-        showarrow=True,
-        arrowhead=4,
-        ax=0,
-        ay=-40,
-        arrowcolor="red",
-        font=dict(color="black", size=12),
-        bgcolor="white",
-        row=2,
-        col=1
     )
 
     # Chart 4: Shedding Distribution
@@ -133,20 +89,27 @@ def display_charts(df_result):
         col=2,
     )
 
-    fig.add_annotation(
-        x=df_result["shedding_category"],
-        y=0,
-        text=f'{df_result["breed"]}',
-        showarrow=True,
-        arrowhead=4,
-        ax=0,
-        ay=-40,
-        arrowcolor="red",
-        font=dict(color="black", size=12),
-        bgcolor="white",
-        row=2,
-        col=2,
-    )
+    loop_object = [['average_height', 1, 1],
+                   ['average_weight', 1, 2],
+                   ['average_expectancy', 2, 1],
+                   ['shedding_category', 2, 2],]
+
+    # Add annotations to each chart
+    for i in loop_object:
+        fig.add_annotation(
+            x=df_result[i[0]],
+            y=0,
+            text=f'{df_result["breed"]}',
+            showarrow=True,
+            arrowhead=4,
+            ax=0,
+            ay=-40,
+            arrowcolor="red",
+            font=dict(color="black", size=12),
+            bgcolor="white",
+            row=i[1],
+            col=i[2],
+        )
 
     fig.update_layout(height=900, width=900)
     st.plotly_chart(fig, theme="streamlit", use_container_width=True)
@@ -205,5 +168,6 @@ def main():
         display_charts(df_result)
 
 if __name__ == "__main__":
+    print(f'Running at time: {time.strftime("%Y-%m-%d %H:%M:%S", time.localtime(time.time()))}')
     df = read_and_process_csv()
     main()
