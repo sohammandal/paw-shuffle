@@ -155,6 +155,7 @@ tzlocal==2.1
 urllib3==1.26.4
 validators==0.18.2
 virtualenv==20.7.2
+watchdog==3.0.0
 wcwidth==0.2.5
 webencodings==0.5.1
 Werkzeug==2.0.3
