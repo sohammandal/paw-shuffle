@@ -4,7 +4,7 @@
 This Streamlit application utilizes the Dog API to generate random dog images and provides detailed information about the breed using the American Kennel Club (AKC) dataset
 
 ### Live Deployment 
-https://paw-shuffle.streamlit.app/
+[![Streamlit App](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://paw-shuffle.streamlit.app/)
 
 ![Screenshot 2024-01-12 at 10 08 59 PM](https://github.com/sohammandal/paw-shuffle/assets/18245872/9fa79bdf-0059-4142-bc51-49fe6d202603)
 
